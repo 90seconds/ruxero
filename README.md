@@ -40,10 +40,10 @@
 * Provide an easy configuration interface
 
     ``` ruby
-    RuXero.configure do
-      oauth_consumer_key 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
-      oauth_consumer_secret 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
-      private_key_path Rails.root.join('config/xero/privatekey.pem')
+    RuXero.configure do |config|
+      config.oauth_consumer_key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
+      config.oauth_consumer_secret = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
+      config.private_key_path = Rails.root.join('config/xero/privatekey.pem')
     end
 
     RuXero.configuration.oauth_consumer_key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'

@@ -14,8 +14,12 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   # s.rubyforge_project = "RuXero"
 
-  s.add_development_dependency "rspec", "~> 2.6.0"
-  s.add_development_dependency "mocha", "~> 0.10.0"
+  s.add_runtime_dependency "activesupport", ">= 3.0.0"
+  s.add_runtime_dependency "i18n", ">= 0.5.0" # activesupport needs this but doesn't specify it
+  s.add_runtime_dependency "nokogiri", ">= 1.4.0"
+  s.add_runtime_dependency "oauth", ">= 0.4.5"
+  s.add_development_dependency "rspec", ">= 2.6.0"
+  s.add_development_dependency "mocha", ">= 0.9.0"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

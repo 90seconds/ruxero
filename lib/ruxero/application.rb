@@ -29,7 +29,9 @@ module Ruxero
 
       case response.code.to_i
       when 200
-        ::Nokogiri::XML(response.body)
+        result = ::Nokogiri::XML(response.body)
+        raise Ruxero::NotParsable unless result.root.name == 'Response'
+        result
       else
         response
       end

@@ -1,6 +1,6 @@
 # Ruxero (Xero API Ruby Client) ![Project status](http://stillmaintained.com/waynerobinson/xeroizer.png)
 
-* **Github**: [https://github.com/KieranP/Ruxero](https://github.com/KieranP/Ruxero)
+* **Github**: [https://github.com/90seconds/ruxero](https://github.com/90seconds/ruxero)
 * **Author**: Kieran Pilkington ([https://github.com/KieranP](https://github.com/KieranP))
 * **Coypright:** 2011
 * **License:** MIT License

@@ -1,4 +1,4 @@
-# Ruxero (Xero API Ruby Client) ![Project status](http://stillmaintained.com/waynerobinson/xeroizer.png)
+# Ruxero (Xero API Ruby Client) ![Project status](http://stillmaintained.com/90seconds/xeroizer.png)
 
 * **Github**: [https://github.com/90seconds/ruxero](https://github.com/90seconds/ruxero)
 * **Author**: Kieran Pilkington ([https://github.com/KieranP](https://github.com/KieranP))
@@ -10,8 +10,10 @@
 * Provide a Rails 3 like syntax for querying records
 
     ``` ruby
-    Ruxero::Invoice.where(:invoice_id => 'something').all
-    Ruxero::Contact.where(:contact_id => 'something').all
+    Ruxero::Invoice.find('abc123-abc123-abc123-abc123')
+    Ruxero::Contact.where(:status => 'ACTIVE').all
+    Ruxero::Contact.where(:status => 'ACTIVE').order('Name').first
+    Ruxero::Contact.where(:status => 'ACTIVE').order('Name').last
     ```
 
 * Provide a Rails 3 like syntax for creating records
@@ -29,10 +31,10 @@
 * Provide a Rails 3 like syntax for updating records
 
     ``` ruby
-    record = Ruxero::Contact.where(:contact_id => 'something').first
+    record = Ruxero::Contact.find('abc123-abc123-abc123-abc123')
     record.update_attributes(:name => 'Joe Somebody')
 
-    record = Ruxero::Contact.where(:contact_id => 'something').first
+    record = Ruxero::Contact.find('abc123-abc123-abc123-abc123')
     record.name = 'Joe Somebody'
     record.save
     ```

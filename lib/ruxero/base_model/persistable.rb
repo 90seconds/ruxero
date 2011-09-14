@@ -1,7 +1,7 @@
 class Ruxero::BaseModel
 
   def save
-    raise Ruxero::NotSupportedError
+    raise Ruxero::NotImplemented.new("#{self.class.name}#save")
   end
 
   def update_attributes(attributes = {})

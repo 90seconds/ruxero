@@ -42,14 +42,15 @@ module Ruxero
   end
 
   class ApiException < StandardError
-    def initialize(code, type, message)
+    def initialize(code, type, message, extra = '')
       @code = code
       @type = type
       @message = message
+      @extra = extra
     end
 
     def to_s
-      "#{@type} (#{@code}) - #{@message}"
+      "#{@type} (#{@code}) - #{@message} #{"(#{@extra})" if @extra.present?}"
     end
   end
 

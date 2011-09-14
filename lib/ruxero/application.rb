@@ -62,9 +62,10 @@ module Ruxero
       when 400
         result = parse(response, :expect => 'ApiException')
         raise Ruxero::ApiException.new(
-          result.css("ErrorNumber").text,
-          result.css("Type").text,
-          result.css("Message").text
+          result.css("ErrorNumber").first.text,
+          result.css("Type").first.text,
+          result.css("Message").first.text,
+          result.css("ValidationErrors ValidationError Message").collect(&:text).join(', ')
         )
 
       when 404

@@ -1,12 +1,19 @@
 class Ruxero::BaseModel
 
   def self.all(params = {})
-    path = "/api.xro/2.0/#{pluralized_name}"
-    if params.any?
-      path += "?" + params.map {|key,value| "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}"}.join("&")
-    end
-    result = Ruxero.application.get(path)
+    parts = ["/api.xro/2.0/#{pluralized_name}", build_conditions(params)]
+    result = Ruxero.application.get(parts.join('?'))
     parse_collection(result) || Array.new
+  end
+
+  private
+
+  def self.build_conditions(params)
+    if params.any?
+      params.map { |k, v|
+        "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}"
+      }.join("&")
+    end
   end
 
 end

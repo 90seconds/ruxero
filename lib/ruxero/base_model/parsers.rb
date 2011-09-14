@@ -9,9 +9,9 @@ class Ruxero::BaseModel
   end
 
   def self.parse_collection(collection)
-    collection.css("#{pluralized_name} #{singularized_name}").collect do |record|
+    collection.css("#{pluralized_name} #{singularized_name}").collect { |record|
       parse_record(record)
-    end
+    }.compact
   end
 
   def self.parse_record(record)

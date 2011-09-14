@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "ruxero/version"
 
 Gem::Specification.new do |s|
-  s.name        = "RuXero"
+  s.name        = "ruxero"
   s.version     = Ruxero::VERSION
   s.authors     = ["Kieran Pilkington"]
   s.email       = ["kieran776@gmail.com"]

@@ -18,6 +18,11 @@ module Ruxero
     cattr_accessor :oauth_consumer_key
     cattr_accessor :oauth_consumer_secret
     cattr_accessor :private_key_path
+    cattr_accessor :rate_limit_retry_attempts
+    cattr_accessor :rate_limit_retry_interval
+
+    @@rate_limit_retry_attempts = 0
+    @@rate_limit_retry_interval = 2
 
     def self.inspect
       settings = Ruxero.configuration.class_variables.collect do |class_var|

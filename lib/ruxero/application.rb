@@ -47,35 +47,45 @@ module Ruxero
     private
 
     def request(http_method, path, *arguments)
-      options = arguments.extract_options!
-      options['charset'] = 'utf-8'
-      options['Content-Type'] = 'application/x-www-form-urlencoded' unless http_method == :get
-      arguments = { :xml => arguments.join } if [:post, :put].include?(http_method)
+      attempts = 0
 
-      arguments = [arguments, options].flatten
-      response = access_token.request(http_method, path, *arguments)
+      begin
+        attempts += 1
 
-      case response.code.to_i
-      when 200
-        parse(response, :expect => 'Response')
+        options = arguments.extract_options!
+        options['charset'] = 'utf-8'
+        options['Content-Type'] = 'application/x-www-form-urlencoded' unless http_method == :get
+        arguments = { :xml => arguments.join } if [:post, :put].include?(http_method)
 
-      when 400
-        result = parse(response, :expect => 'ApiException')
-        raise Ruxero::ApiException.new(
-          result.css("ErrorNumber").first.text,
-          result.css("Type").first.text,
-          result.css("Message").first.text,
-          result.css("ValidationErrors ValidationError Message").collect(&:text).join(', ')
-        )
+        arguments = [arguments, options].flatten
+        response = access_token.request(http_method, path, *arguments)
 
-      when 401
-        handle_oauth_error!(response)
+        case response.code.to_i
+        when 200
+          parse(response, :expect => 'Response')
 
-      when 404
-        raise Ruxero::NotFound.new(path)
+        when 400
+          result = parse(response, :expect => 'ApiException')
+          raise Ruxero::ApiException.new(
+            result.css("ErrorNumber").first.text,
+            result.css("Type").first.text,
+            result.css("Message").first.text,
+            result.css("ValidationErrors ValidationError Message").collect(&:text).join(', ')
+          )
 
-      else
-        raise "Unknown response code: #{response.code.to_i}"
+        when 401
+          handle_oauth_error!(response)
+
+        when 404
+          raise Ruxero::NotFound.new(path)
+
+        else
+          raise "Unknown response code: #{response.code.to_i}"
+        end
+      rescue Ruxero::RateLimitExceeded => exception
+        raise exception if attempts > Ruxero.configuration.rate_limit_retry_attempts
+        sleep Ruxero.configuration.rate_limit_retry_interval
+        retry
       end
     end
 

@@ -68,6 +68,9 @@ module Ruxero
           result.css("ValidationErrors ValidationError Message").collect(&:text).join(', ')
         )
 
+      when 401
+        handle_oauth_error!(response)
+
       when 404
         raise Ruxero::NotFound.new(path)
 
@@ -80,6 +83,19 @@ module Ruxero
       result = ::Nokogiri::XML(response.body)
       return result if result.root.name == options[:expect]
       raise Ruxero::UnparseableResponse.new(options[:expect], result.root.name)
+    end
+
+    def handle_oauth_error!(response)
+      error_details = CGI.parse(response.body)
+      error_key = error_details["oauth_problem"].first
+      error_desc = error_details["oauth_problem_advice"].first
+
+      case error_key
+      when "rate limit exceeded"
+        raise Ruxero::RateLimitExceeded.new("#{error_desc} (#{error_key})")
+      else
+        raise Ruxero::GenericOAuthError.new("#{error_desc} (#{error_key})")
+      end
     end
 
   end

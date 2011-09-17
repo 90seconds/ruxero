@@ -30,6 +30,12 @@ module Ruxero
     end
   end
 
+  class GenericOAuthError < StandardError
+  end
+
+  class RateLimitExceeded < StandardError
+  end
+
   class UnparseableResponse < StandardError
     def initialize(expected_root_node, actual_root_node)
       @expected_root_node = expected_root_node

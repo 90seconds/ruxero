@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Ruxero::VERSION
   s.authors     = ["Kieran Pilkington"]
   s.email       = ["kieran776@gmail.com"]
-  s.homepage    = "https://github.com/KieranP/RuXero"
+  s.homepage    = "https://github.com/90seconds/RuXero"
   s.summary     = %q{Xero API Ruby Client}
   s.description = %q{Xero API Ruby Client}
 

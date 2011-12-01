@@ -3,8 +3,11 @@ module Ruxero
   class << self
 
     def application
-      raise Ruxero::NotConfigured.new(:application) if Ruxero.configuration.application.nil?
-      @application ||= Ruxero.configuration.application.new
+      if Ruxero.configuration.application.nil?
+        raise Ruxero::NotConfigured.new(:application)
+      end
+
+      Ruxero.configuration.application.new
     end
 
   end

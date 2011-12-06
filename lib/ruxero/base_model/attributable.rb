@@ -14,7 +14,6 @@ class Ruxero::BaseModel
   end
 
   def initialize(attributes = {})
-    super
     _set_attributes(attributes)
   end
 

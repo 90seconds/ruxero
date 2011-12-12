@@ -1,8 +1,8 @@
 class Ruxero::BaseModel
 
-  def self.all(params = {})
+  def self.all(params = {}, headers = {})
     parts = ["/api.xro/2.0/#{pluralized_name}", build_conditions(params)]
-    result = Ruxero.application.get(parts.join('?'))
+    result = Ruxero.application.get(parts.join('?'), headers)
     parse_collection(result) || Array.new
   end
 

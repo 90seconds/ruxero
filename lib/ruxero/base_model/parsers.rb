@@ -29,7 +29,7 @@ class Ruxero::BaseModel
   def self.convert_value(field, element, value)
     case field[:type].to_s
     when 'String'  then value.to_s
-    when 'Time'    then Time.parse(value)
+    when 'Time'    then Time.parse("#{value} UTC")
     when 'Date'    then Date.parse(value)
     when 'Float'   then value.to_f
     when 'Boolean' then (value == 'true')

@@ -60,4 +60,10 @@ module Ruxero
     end
   end
 
+  class TemporarilyUnavailable < StandardError
+    def to_s
+      "The Xero API is currently offline for maintenance"
+    end
+  end
+
 end

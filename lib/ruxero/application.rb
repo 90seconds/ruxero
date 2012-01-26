@@ -82,6 +82,9 @@ module Ruxero
         when 404
           raise Ruxero::NotFound.new(path)
 
+        when 503
+          raise Ruxero::TemporarilyUnavailable.new
+
         else
           raise "Unknown response code: #{response.code.to_i}"
         end

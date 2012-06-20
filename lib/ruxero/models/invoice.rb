@@ -22,4 +22,12 @@ class Ruxero::Invoice < Ruxero::BaseModel
   readonly :updated_date_utc, :type => Time, :xml_node => 'UpdatedDateUTC'
   readonly :sent_to_contact, :type => Boolean
 
+  def sent_to_contact?
+    self.sent_to_contact || false
+  end
+
+  def paid?
+    self.amount_paid == self.total
+  end
+
 end

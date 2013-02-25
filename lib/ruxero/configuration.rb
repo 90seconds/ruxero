@@ -17,6 +17,7 @@ module Ruxero
     cattr_accessor :application
     cattr_accessor :oauth_consumer_key
     cattr_accessor :oauth_consumer_secret
+    cattr_accessor :oauth_consumer_options
     cattr_accessor :private_key_path
     cattr_accessor :rate_limit_retry_attempts
     cattr_accessor :rate_limit_retry_interval

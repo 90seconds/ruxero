@@ -16,7 +16,7 @@ module Ruxero
 
     attr_reader :consumer, :access_token
 
-    DEFAULT_OPTIONS = {
+    DEFAULT_OAUTH_OPTIONS = {
       :site               => "https://api.xero.com",
       :request_token_path => "/oauth/RequestToken",
       :authorize_path     => "/oauth/Authorize",

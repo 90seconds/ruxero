@@ -52,19 +52,28 @@ module Ruxero
     def request(http_method, path, *arguments)
       attempts = 0
 
+      options = arguments.extract_options!
+      format = options.delete(:format)
+
+      options['charset'] = 'utf-8'
+
+      if http_method == :get
+        options['Accept'] = 'application/pdf' if format == :pdf
+      elsif [:post, :put].include?(http_method)
+        options['Content-Type'] = 'application/x-www-form-urlencoded'
+        arguments = { :xml => arguments.join }
+      end
+
+      arguments = [arguments, options].flatten
+
       begin
         attempts += 1
 
-        options = arguments.extract_options!
-        options['charset'] = 'utf-8'
-        options['Content-Type'] = 'application/x-www-form-urlencoded' unless http_method == :get
-        arguments = { :xml => arguments.join } if [:post, :put].include?(http_method)
-
-        arguments = [arguments, options].flatten
         response = access_token.request(http_method, path, *arguments)
 
         case response.code.to_i
         when 200
+          return response if format == :pdf
           parse(response, :expect => 'Response')
 
         when 400

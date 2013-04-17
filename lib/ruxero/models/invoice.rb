@@ -22,6 +22,12 @@ class Ruxero::Invoice < Ruxero::BaseModel
   readonly :updated_date_utc, :type => Time, :xml_node => 'UpdatedDateUTC'
   readonly :sent_to_contact, :type => Boolean
 
+  def self.download(invoice_id)
+    path = "/api.xro/2.0/Invoices/#{invoice_id}"
+    headers = { :format => :pdf }
+    Ruxero.application.get(path, headers)
+  end
+
   def sent_to_contact?
     self.sent_to_contact || false
   end

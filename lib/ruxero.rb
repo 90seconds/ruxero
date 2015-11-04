@@ -21,8 +21,10 @@ require 'ruxero/base_model/parsers'
 require 'ruxero/base_model/persistable'
 require 'ruxero/configuration'
 require 'ruxero/exceptions'
+require 'ruxero/models/account'
 require 'ruxero/models/contact'
 require 'ruxero/models/invoice'
+require 'ruxero/models/payment'
 require 'ruxero/version'
 
 module Ruxero

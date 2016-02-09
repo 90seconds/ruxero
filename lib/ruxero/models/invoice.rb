@@ -17,6 +17,7 @@ class Ruxero::Invoice < Ruxero::BaseModel
   readonly :amount_due, type: Float
   readonly :amount_paid, type: Float
   readonly :amount_credited, type: Float
+  readonly :fully_paid_on_date, type: Date
   readonly :updated_date_utc, type: Time
   readonly :sent_to_contact, type: Boolean
   accessor :contact, type: lambda { Ruxero::Contact }
@@ -32,7 +33,7 @@ class Ruxero::Invoice < Ruxero::BaseModel
     self.sent_to_contact || false
   end
 
-  def paid?
+  def fully_paid?
     self.amount_paid == self.total
   end
 

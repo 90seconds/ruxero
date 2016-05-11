@@ -9,6 +9,7 @@ class Ruxero::Invoice < Ruxero::BaseModel
   accessor :branding_theme_id, type: String
   accessor :url, type: String
   accessor :currency_code, type: String
+  accessor :currency_rate, type: Float
   accessor :status, type: String
   accessor :sub_total, type: Float
   accessor :total_tax, type: Float

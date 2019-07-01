@@ -7,6 +7,7 @@ class Ruxero::PrivateApplication < Ruxero::Application
       DEFAULT_OAUTH_OPTIONS.merge({
         :signature_method => 'RSA-SHA1',
         :private_key_file => Ruxero.configuration.private_key_path
+        :private_key => Ruxero.configuration.private_key
       }.merge(Ruxero.configuration.oauth_consumer_options))
     )
 

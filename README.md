@@ -47,6 +47,8 @@
       config.oauth_consumer_key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
       config.oauth_consumer_secret = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'
       config.private_key_path = Rails.root.join('config/xero/privatekey.pem')
+      # OR
+      config.private_key = '<private-key>' 
     end
 
     Ruxero.configuration.oauth_consumer_key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCD'

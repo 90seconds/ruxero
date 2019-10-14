@@ -85,14 +85,11 @@ module Ruxero
             result.css("ValidationErrors ValidationError Message").collect(&:text).join(', ')
           )
 
-        when 401
-          handle_oauth_error!(response)
-
         when 404
           raise Ruxero::NotFound.new(path)
 
-        when 503
-          raise Ruxero::TemporarilyUnavailable.new
+        when 401, 503
+          handle_oauth_error!(response)
 
         else
           raise "Unknown response code: #{response.code.to_i}"

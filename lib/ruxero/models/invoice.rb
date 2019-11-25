@@ -35,7 +35,7 @@ class Ruxero::Invoice < Ruxero::BaseModel
   end
 
   def fully_paid?
-    self.amount_paid == self.total
+    status == 'PAID'
   end
 
 end

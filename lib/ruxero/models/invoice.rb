@@ -3,6 +3,8 @@ class Ruxero::Invoice < Ruxero::BaseModel
   accessor :type, type: String
   accessor :date, type: Date
   accessor :due_date, type: Date
+  accessor :expected_payment_date, type: Date
+  accessor :planned_payment_date, type: Date
   accessor :line_amount_types, type: String
   accessor :invoice_number, type: String
   accessor :reference, type: String

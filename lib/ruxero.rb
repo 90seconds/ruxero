@@ -25,6 +25,7 @@ require 'ruxero/models/account'
 require 'ruxero/models/contact'
 require 'ruxero/models/invoice'
 require 'ruxero/models/payment'
+require 'ruxero/models/user'
 require 'ruxero/version'
 
 module Ruxero
